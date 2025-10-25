@@ -1,0 +1,71 @@
+# ───────────────────────────────
+# 📁 NODE + REACT FULL STACK
+# ───────────────────────────────
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependency folders
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+build/
+dist-ssr/
+*.local
+
+# Environment files
+.env
+**/.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS generated files
+Thumbs.db
+Desktop.ini
+
+# Misc
+*.zip
+*.tar.gz
+coverage/
+.tmp/
+.cache/
+
+# Local data
+*.sqlite
+*.db
+
+# ───────────────────────────────
+# ✅ FRONTEND (React + Tailwind)
+# ───────────────────────────────
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+
+# ───────────────────────────────
+# ✅ BACKEND (Node.js + Express)
+# ───────────────────────────────
+backend/node_modules/
+backend/.env
+backend/uploads/
+backend/logs/
