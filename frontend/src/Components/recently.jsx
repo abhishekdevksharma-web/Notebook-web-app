@@ -1,74 +1,169 @@
 import { useContext, useEffect } from "react";
 import NoteContext from "../context/notes/noteContext";
-import NoteCard from "./NoteCard";
 
 const RecentNotes = () => {
   const context = useContext(NoteContext);
-  const {
-    notes,
-    fetchallnotes,
-    fetchRecentAddedNotes,
-    recentNote,
-    setrecentNote,
-  } = context;
+  const { fetchRecentAddedNotes, recentNote, colorMode } = context;
 
   useEffect(() => {
     fetchRecentAddedNotes();
-  }, []); 
+  }, [fetchRecentAddedNotes]);
+
 
   return (
-    <div className="items-center p-6  h-[90vh] max-h-[88vh] overflow-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-white/10 bg-white/10 rounded-2xl border border-gray-700 shadow-lg ">
-      <h2 className="text-2xl font-semibold text-white mb-4">
-        Your 5 Recently Added Notes
-      </h2>
-      <div className="flex flex-col-reverse gap-5">
+    <div
+      className={
+        `h-full overflow-hidden rounded-2xl border shadow-lg transition-all duration-300 ` +
+        (colorMode
+          ? "border-slate-800 bg-gradient-to-b from-slate-900 to-slate-950"
+          : "border-violet-100 bg-white")
+      }
+    >
+      {/* Header */}
+      <div
+        className={
+          `flex items-center justify-between px-6 pt-5 pb-3 border-b transition-colors duration-300 ` +
+          (colorMode
+            ? "border-slate-800"
+            : "border-violet-100")
+        }
+      >
+        <div>
+          <h2
+            className={
+              `text-xl font-semibold transition-colors duration-300 ` +
+              (colorMode ? "text-slate-100" : "text-gray-900")
+            }
+          >
+            Recently Added Notes
+          </h2>
+          <p
+            className={
+              `text-xs mt-1 transition-colors duration-300 ` +
+              (colorMode ? "text-slate-400" : "text-gray-500")
+            }
+          >
+            Last 5 notes you created
+          </p>
+        </div>
+
+        <span
+          className={
+            `rounded-full text-xs font-medium px-3 py-1 transition-colors duration-300 ` +
+            (colorMode
+              ? "bg-slate-800 text-slate-100 border border-slate-700"
+              : "bg-violet-100 text-violet-700")
+          }
+        >
+          {Array.isArray(recentNote) ? recentNote.length : 0} Notes
+        </span>
+      </div>
+
+      {/* Notes List */}
+      <div className="h-full overflow-y-auto px-6 pb-25 pt-4 space-y-4 scrollbar-thin scrollbar-thumb-violet-300 scrollbar-track-transparent">
         {Array.isArray(recentNote) && recentNote.length > 0 ? (
           recentNote.map((note) => (
             <div
               key={note._id}
-              className="py-1 pb-3 px-3 max-h-30 overflow-hidden bg-white/5 border border-gray-600 rounded-lg"
+              className={
+                `relative rounded-xl border p-4 shadow-sm hover:shadow-md transition-all duration-200 ` +
+                (colorMode
+                  ? "bg-slate-900 border-slate-700 hover:border-violet-500/60"
+                  : "bg-white border-gray-200 hover:border-violet-200")
+              }
             >
-              <div className="flex gap-2 items-center">
-                <h3 className="text-lg font-semibold text-purple-300">
-                  {note.title}
-                </h3>
-                <button
-                  onClick={() => onView(note._id)}
-                  className=" cursor-pointer p-2 text-sm font-medium text-sky-400 hover:text-sky-300 transition duration-150"
-                  title="View Details"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
+              {/* Accent line */}
+              <div
+                className={
+                  `absolute left-0 top-4 bottom-4 w-1 rounded-full bg-gradient-to-b ` +
+                  (colorMode
+                    ? "from-violet-400 to-sky-500"
+                    : "from-violet-500 to-indigo-500")
+                }
+              ></div>
+
+              <div className="pl-4">
+                <div className="flex justify-between items-center gap-2">
+                  <h3
+                    className={
+                      `text-lg font-semibold truncate transition-colors duration-300 ` +
+                      (colorMode ? "text-violet-200" : "text-violet-700")
+                    }
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                    ></path>
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                    ></path>
-                  </svg>
-                </button>
+                    {note.title || "Untitled Note"}
+                  </h3>
+
+                  {note.tag && (
+                    <span
+                      className={
+                        `text-xs px-3 py-1 rounded-full transition-colors duration-300 ` +
+                        (colorMode
+                          ? "bg-violet-500/10 text-violet-200 border border-violet-500/30"
+                          : "bg-violet-100 text-violet-700")
+                      }
+                    >
+                      {note.tag}
+                    </span>
+                  )}
+                </div>
+
+                <p
+                  className={
+                    `text-sm mt-2 line-clamp-2 transition-colors duration-300 ` +
+                    (colorMode ? "text-slate-300" : "text-gray-700")
+                  }
+                >
+                  {note.description || "No description available."}
+                </p>
+
+                <div className="flex justify-between items-center mt-3">
+                  <span
+                    className={
+                      `text-xs transition-colors duration-300 ` +
+                      (colorMode ? "text-slate-500" : "text-gray-400")
+                    }
+                  >
+                    Recently added
+                  </span>
+                  <span
+                    className={
+                      `text-xs font-medium cursor-pointer hover:underline transition-colors duration-300 ` +
+                      (colorMode ? "text-violet-300" : "text-violet-600")
+                    }
+                  >
+                    View / Edit
+                  </span>
+                </div>
               </div>
-              <p className="text-gray-300 mb-1 text-sm max-h-10 overflow-hidden">
-                {note.description}
-              </p>
-              <span className="px-3 py-1 text-xs text-teal-300 bg-gray-700 rounded-full">
-                {note.tag}
-              </span>
             </div>
           ))
         ) : (
-          <p className="text-gray-400 text-center py-5">No notes available</p>
+          <div className="h-full flex flex-col items-center justify-center text-center">
+            <div
+              className={
+                `w-12 h-12 rounded-xl flex items-center justify-center mb-3 transition-colors duration-300 ` +
+                (colorMode ? "bg-slate-800" : "bg-violet-100")
+              }
+            >
+              <span className="text-xl">📝</span>
+            </div>
+            <p
+              className={
+                `text-sm font-semibold transition-colors duration-300 ` +
+                (colorMode ? "text-slate-100" : "text-gray-800")
+              }
+            >
+              No recent notes found
+            </p>
+            <p
+              className={
+                `text-xs mt-1 max-w-xs transition-colors duration-300 ` +
+                (colorMode ? "text-slate-400" : "text-gray-500")
+              }
+            >
+              Start adding notes and they will appear here.
+            </p>
+          </div>
         )}
       </div>
     </div>

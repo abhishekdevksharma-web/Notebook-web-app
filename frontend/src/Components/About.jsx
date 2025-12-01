@@ -1,147 +1,123 @@
-// HardCodedNotesDark.jsx
-import React, { useState } from "react";
+import React from "react";
+import { motion } from "framer-motion";
+import { BookOpen, PenTool, Star } from "lucide-react";
 
-export default function HardCodedNotesDark() {
-  const [notes, setNotes] = useState([
-    {
-      id: 1,
-      title: "Arrays in C",
-      description:
-        "Short intro to arrays, indexing, and common pitfalls. This note explains how arrays are stored in memory Short intro to arrays, indexing, and common pitfalls. This note explains how arrays are stored in memory...",
-      tags: ["C", "Arrays", "Revision"],
-      date: "24-10-2025",
-    },
-    {
-      id: 2,
-      title: "Functions in C",
-      description:
-        "Functions are reusable blocks of code. They can take parameters and return values...",
-      tags: ["C", "Functions"],
-      date: "23-10-2025",
-    },
-    {
-      id: 3,
-      title: "Pointers",
-      description:
-        "Pointers hold memory addresses of variables. Understanding them is key for dynamic memory management...",
-      tags: ["C", "Pointers"],
-      date: "22-10-2025",
-    },
-  ]);
-
-  const handleDelete = (id) => {
-    setNotes(notes.filter((note) => note.id !== id));
-  };
-
+const About = () => {
   return (
-    <div className=" bg-gray-900 ">
-      <div className="flex gap-4 flex-wrap h-15 w-sm">
-        {notes.map((note) => (
-          <article
-            key={note.id}
-            className="max-w-md w-full bg-gray-800 rounded-2xl shadow-md p-4 ring-1 ring-gray-700 text-gray-100"
-          >
-            {/* Header */}
-            <header className="mb-3">
-              <h3 className="text-lg font-semibold truncate">{note.title}</h3>
-              <p className="mt-1 text-sm h-15 overflow-clip text-gray-300 line-clamp-3">
-                {note.description}
+    <div className="bg-gray-50 text-gray-800 min-h-screen">
+      {/* Header */}
+      <header className="bg-white shadow-md sticky top-0 z-50">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+          <h1 className="text-2xl font-bold text-[#7e22ce]">Notebook App</h1>
+          <nav className="space-x-6">
+            <a href="/" className="text-gray-600 hover:text-[#7e22ce] transition">
+              Home
+            </a>
+            <a
+              href="/about"
+              className="text-[#7e22ce] font-medium border-b-2 border-[#7e22ce]"
+            >
+              About
+            </a>
+            <a href="/contact" className="text-gray-600 hover:text-[#7e22ce] transition">
+              Contact
+            </a>
+          </nav>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="bg-[#7e22ce] text-white py-20 text-center">
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="text-4xl font-bold mb-4"
+        >
+          About Notebook App
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="text-lg max-w-2xl mx-auto"
+        >
+          Simplify your note-taking experience with elegance and efficiency.
+        </motion.p>
+      </section>
+
+      {/* About Content */}
+      <section className="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
+        <motion.div
+          initial={{ opacity: 0, x: -60 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+        >
+          <h3 className="text-3xl font-semibold text-[#7e22ce] mb-4">Who We Are</h3>
+          <p className="text-gray-700 leading-relaxed">
+            Notebook App is your digital companion for capturing thoughts, organizing
+            tasks, and storing ideas beautifully. Whether you’re a student, developer, or
+            creative mind, Notebook keeps your notes accessible, clean, and secure.
+          </p>
+        </motion.div>
+
+        <motion.img
+          src="https://cdn-icons-png.flaticon.com/512/2921/2921222.png"
+          alt="Notebook Illustration"
+          className="w-80 mx-auto rounded-xl shadow-lg"
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        />
+      </section>
+
+      {/* Mission Section */}
+      <section className="bg-white py-20">
+        <div className="max-w-5xl mx-auto text-center px-6">
+          <h3 className="text-3xl font-semibold text-[#7e22ce] mb-6">Our Mission</h3>
+          <p className="text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            Our mission is to simplify digital note-taking while keeping it beautifully
+            minimal. We help you focus on your thoughts instead of distractions — so you
+            can write more, think better, and stay productive everywhere you go.
+          </p>
+
+          {/* Features */}
+          <div className="mt-12 grid sm:grid-cols-3 gap-8">
+            <div className="p-6 bg-gray-100 rounded-2xl shadow hover:shadow-lg transition">
+              <BookOpen className="mx-auto text-[#7e22ce] w-10 h-10 mb-3" />
+              <h4 className="font-semibold text-lg">Organized Notes</h4>
+              <p className="text-gray-600 text-sm mt-2">
+                Keep all your notes neatly structured and easy to find.
               </p>
-            </header>
-            <div className="flex ">
-              <div className="md:w-1/1">
-                {note.tags && note.tags.length > 0 && (
-                  <div className="flex flex-wrap gap-2 mt-3 mb-4">
-                    {note.tags.map((tag, i) => (
-                      <span
-                        key={i}
-                        className="text-xs px-2 py-1 rounded-full border border-gray-600 text-gray-200"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-              <div className="md:w-1/2"> 
-                  <div className="flex gap-10 mt-3 mb-4">
-                    <button
-                      onClick={() => onView(_id)}
-                      // Tailwind style: Sky color for visibility/action
-                      className=" cursor-pointer  text-sm font-medium text-sky-400 hover:text-sky-300 transition duration-150"
-                      title="View Details"
-                    >
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                        ></path>
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                        ></path>
-                      </svg>
-                    </button>
-                    <button
-                      onClick={() => {
-                        editNote(note._id);
-                      }}
-                      className=" cursor-pointer   text-sm font-medium text-amber-400 hover:text-amber-300 transition duration-150"
-                      title="Edit Note"
-                    >
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                        ></path>
-                      </svg>
-                    </button>
-                    <button
-                      onClick={() => {
-                        deleteNote(note._id);
-                      }}
-                      className="cursor-pointer   text-sm font-medium text-red-500 hover:text-red-400 transition duration-150"
-                      title="Delete Note"
-                    >
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                        ></path>
-                      </svg>
-                    </button>
-                  </div> 
-              </div>
             </div>
-          </article>
-        ))}
-      </div>
+
+            <div className="p-6 bg-gray-100 rounded-2xl shadow hover:shadow-lg transition">
+              <PenTool className="mx-auto text-[#7e22ce] w-10 h-10 mb-3" />
+              <h4 className="font-semibold text-lg">Smooth Writing</h4>
+              <p className="text-gray-600 text-sm mt-2">
+                Enjoy a clean interface that makes note-taking effortless.
+              </p>
+            </div>
+
+            <div className="p-6 bg-gray-100 rounded-2xl shadow hover:shadow-lg transition">
+              <Star className="mx-auto text-[#7e22ce] w-10 h-10 mb-3" />
+              <h4 className="font-semibold text-lg">Minimal Design</h4>
+              <p className="text-gray-600 text-sm mt-2">
+                Focus on what matters with our simple and elegant layout.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-[#7e22ce] text-white text-center py-6">
+        <p className="text-sm">© 2025 Notebook App. All rights reserved.</p>
+      </footer>
     </div>
   );
-}
+};
+
+export default About;

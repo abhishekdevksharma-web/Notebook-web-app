@@ -26,6 +26,17 @@ const NoteState = (props) => {
   //this state for length of note
   const [noteLenght, setNoteLenght] = useState(0);
 
+  //chatbot state
+  const [isChatbotResponding, setisChatbotResponding] = useState({
+    aiResponding: false,
+    desWord: 0,
+  });
+  // ai state
+  const [recentAiResponce, setrecentAiResponce] = useState("");
+
+  // color state
+  const [colorMode, setcolorMode] = useState(false);
+
   const openProfile = () => {
     setprofileisOpen(true);
     if (localStorage.getItem("User")) {
@@ -40,6 +51,24 @@ const NoteState = (props) => {
 
   const navigate = useNavigate();
   let host = "http://localhost:3000";
+
+  //Generate Description by Chatbot
+
+  const GenerateDesByChatbot = async (data) => {
+    console.log("hello");
+
+    console.log({ data });
+    const responce = await fetch(`${host}/ai/getDescription`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ data }),
+    });
+    const Output = await responce.json();
+    // setisChatbotResponding(false);
+    return Output;
+  };
 
   // fetch all notes
   const fetchallnotes = async () => {
@@ -225,6 +254,11 @@ const NoteState = (props) => {
         setIsLoding,
         noteLenght,
         setNoteLenght,
+        isChatbotResponding,
+        setisChatbotResponding,
+        GenerateDesByChatbot,
+        colorMode,
+        setcolorMode,
       }}
     >
       {props.children}

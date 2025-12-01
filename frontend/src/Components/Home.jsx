@@ -4,23 +4,28 @@ import AddNote from "./add";
 import RecentNotes from "./recently";
 
 const Home = () => {
-  const { isAuth, setnoteLenght } = useContext(NoteContext);
+  const { isAuth, setnoteLenght, colorMode } = useContext(NoteContext);
 
   useEffect(() => {
     // if (isAuth) {
     //   setnoteLenght(localStorage.getItem("User").totalNotes);
     // }
-    console.log("hello");
-    
   }, []);
 
   return (
-    <div className="bg-gradient-to-b h-[100vh] pt-15 bg-gray-900 to-black text-white">
+    <div
+      className={`${
+        !colorMode ? "bg-gray-300" : "bg-black"
+      } h-[100vh] pt-15`}
+    >
       <div className="flex flex-col md:flex-row justify-between gap-6 p-5 w-full h-full">
-        <div className="md:w-1/1 w-full ">
+        {/* Left - Add Note */}
+        <div className="md:w-1/1 w-full">
           <AddNote />
         </div>
-        <div className="md:w-1/2">
+
+        {/* Right - Recent Notes */}
+        <div className="md:w-1/2 w-full">
           <RecentNotes />
         </div>
       </div>
