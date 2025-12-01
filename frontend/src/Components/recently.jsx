@@ -26,7 +26,7 @@ const RecentNotes = () => {
           recentNote.map((note) => (
             <div
               key={note._id}
-              className="py-1 px-3 max-h-30 overflow-hidden bg-white/5 border border-gray-600 rounded-lg"
+              className="py-1 pb-3 px-3 max-h-30 overflow-hidden bg-white/5 border border-gray-600 rounded-lg"
             >
               <div className="flex gap-2 items-center">
                 <h3 className="text-lg font-semibold text-purple-300">
@@ -59,7 +59,7 @@ const RecentNotes = () => {
                   </svg>
                 </button>
               </div>
-              <p className="text-gray-300 text-sm max-h-10 overflow-hidden">
+              <p className="text-gray-300 mb-1 text-sm max-h-10 overflow-hidden">
                 {note.description}
               </p>
               <span className="px-3 py-1 text-xs text-teal-300 bg-gray-700 rounded-full">

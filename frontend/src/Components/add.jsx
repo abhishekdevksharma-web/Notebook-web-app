@@ -82,13 +82,14 @@ const AddNote = () => {
               className="w-full bg-[#121212] text-gray-200 border border-gray-700 focus:border-purple-500 focus:ring-2 focus:ring-purple-700 rounded-xl p-3 outline-none transition"
             />
           </div>
-
-          <button
-            type="submit"
-            className="w-full bg-blue-700 hover:bg-purple-800 transition-all py-2 rounded-lg text-white font-semibold"
-          >
-            Add Note
-          </button>
+          <div className="w-full text-center">
+            <button
+              type="submit"
+              className="  cursor-pointer bg-blue-700 hover:bg-purple-800 transition-all py-2 rounded-lg text-white font-semibold w-100"
+            >
+              Add Note
+            </button>
+          </div>
         </form>
       </div>
     </div>

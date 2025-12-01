@@ -145,14 +145,14 @@ function Navbar() {
               <div className="flex gap-4">
                 <button
                   onClick={goToLogin}
-                  className="bg-blue-700 cursor-pointer text-white font-semibold px-6 py-1 rounded hover:bg-blue-800 transition"
+                  className="border-2 cursor-pointer text-white border-blue-700 font-semibold px-6 py-1 rounded hover:bg-blue-800 transition"
                 >
                   Login
                 </button>
 
                 <button
                   onClick={goToSign}
-                  className="border-2 border-blue-700 cursor-pointer text-blue-500 font-semibold px-5 py-1 rounded hover:bg-blue-700 hover:text-white transition"
+                  className="border-2 text-white bg-blue-700 border-blue-700 cursor-pointer   font-semibold px-5 py-1 rounded hover:bg-blue-700 hover:text-white transition"
                 >
                   Signup
                 </button>
